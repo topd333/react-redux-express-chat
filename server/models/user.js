@@ -7,26 +7,28 @@ const Schema = mongoose.Schema;
 //= ===============================
 // User Schema
 //= ===============================
-const UserSchema = new Schema({
-  email: {
-    type: String,
-    lowercase: true,
-    unique: true,
-    required: true
+const UserSchema = new Schema(
+  {
+    email: {
+      type: String,
+      lowercase: true,
+      unique: true,
+      required: true
+    },
+    username: {
+      type: String,
+      unique: true,
+      required: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
   },
-  username: {
-    type: String,
-    unique: true,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-},
   {
     timestamps: true
-  });
+  }
+);
 
 //= ===============================
 // User ORM Methods

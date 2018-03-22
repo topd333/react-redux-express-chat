@@ -36,4 +36,12 @@ module.exports = function (app) {
 
   // View user profile route
   userRoutes.get('/:userId', requireAuth, UserController.viewProfile);
+
+  // Test protected route
+  apiRoutes.get('/protected', requireAuth, (req, res) => {
+    res.send({ content: 'The protected test route is functional!' });
+  });
+
+  // Set url for API group routes
+  app.use('/api', apiRoutes);
 };
