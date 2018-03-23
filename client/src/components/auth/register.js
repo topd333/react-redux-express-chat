@@ -4,22 +4,22 @@ import { Field, reduxForm } from 'redux-form';
 import { registerUser } from '../../actions/auth';
 
 const form = reduxForm({
-  form: 'register',
+  form: 'Register',
   validate,
 });
 
 const renderField = field => (
   <div>
-    <input className="form-control" {...field.input} />
-    {field.touched && field.error && <div className="error">{field.error}</div>}
+    <input className="form-control" {...field.input} type={field.type} />
+    {field.meta.touched && field.meta.error && <div className="help-block error">{field.meta.error}</div>}
   </div>
 );
 
 function validate(formProps) {
   const errors = {};
 
-  if (!formProps.userame) {
-    errors.firstName = 'Please enter a userame';
+  if (!formProps.username) {
+    errors.username = 'Please enter a username';
   }
 
   if (!formProps.email) {
@@ -41,7 +41,7 @@ class Register extends Component {
   renderAlert() {
     if (this.props.errorMessage) {
       return (
-        <div>
+        <div className="alert alert-danger">
           <span><strong>Error!</strong> {this.props.errorMessage}</span>
         </div>
       );

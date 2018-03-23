@@ -12,14 +12,22 @@ const localOptions = {
 };
 
 // Setting up local login strategy
-const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
-  User.findOne({ email }, (err, user) => {
-    if (err) { return done(err); }
-    if (!user) { return done(null, false, { error: 'Your login details could not be verified. Please try again.' }); }
+const localLogin = new LocalStrategy(localOptions, (username, password, done) => {
+  User.findOne({ 'email': username }, (err, user) => {
+    if (err) {
+      return done(err, false, { error: 'Something went wrong.' });
+    }
+    if (!user) {
+      return done(null, false, { error: 'Unregistered User.' });
+    }
 
     user.comparePassword(password, (err, isMatch) => {
-      if (err) { return done(err); }
-      if (!isMatch) { return done(null, false, { error: 'Your login details could not be verified. Please try again.' }); }
+      if (err) {
+        return done(err, false, { error: 'Something went wrong.' });
+      }
+      if (!isMatch) {
+        return done(null, false, { error: 'Invalid Password.' });
+      }
 
       return done(null, user);
     });

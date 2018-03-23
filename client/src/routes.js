@@ -17,9 +17,6 @@ import Logout from './components/auth/logout';
 import Dashboard from './components/dashboard/dashboard';
 import ViewProfile from './components/dashboard/profile/view-profile';
 
-// Import admin pages
-import AdminDashboard from './components/admin/dashboard';
-
 // Import higher order components
 import RequireAuth from './components/auth/require_auth';
 
@@ -31,8 +28,6 @@ export default (
     <Route path="logout" component={Logout} />
 
     <Route path="profile" component={RequireAuth(ViewProfile)} />
-
-    <Route path="admin" component={RequireAuth(AdminDashboard)} />
 
     <Route path="dashboard">
       <IndexRoute component={RequireAuth(Dashboard)} />

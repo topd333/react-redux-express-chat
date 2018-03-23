@@ -1,8 +1,8 @@
 const AuthenticationController = require('./controllers/authentication');
 const UserController = require('./controllers/user');
 const express = require('express');
-const passport = require('passport');
 const passportService = require('./config/passport');
+const passport = require('passport');
 
 // Middleware to require login/auth
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -39,7 +39,7 @@ module.exports = function (app) {
 
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {
-    res.send({ content: 'The protected test route is functional!' });
+    res.status(200).send({ content: 'The protected test route is functional!' });
   });
 
   // Set url for API group routes

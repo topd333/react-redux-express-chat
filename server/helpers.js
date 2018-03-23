@@ -2,7 +2,7 @@
 exports.setUserInfo = function setUserInfo(request) {
   const getUserInfo = {
     _id: request._id,
-    username: request.username,
+    name: request.name,
     email: request.email,
     role: request.role
   };

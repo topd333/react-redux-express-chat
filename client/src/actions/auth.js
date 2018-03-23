@@ -17,7 +17,7 @@ export function loginUser({ email, password }) {
       window.location.href = `${CLIENT_ROOT_URL}/dashboard`;
     })
     .catch((error) => {
-      errorHandler(dispatch, error.response, AUTH_ERROR);
+      errorHandler(dispatch, error, AUTH_ERROR);
     });
   };
 }
@@ -31,8 +31,8 @@ export function registerUser({ email, username, password }) {
       dispatch({ type: AUTH_USER });
       window.location.href = `${CLIENT_ROOT_URL}/dashboard`;
     })
-    .catch((error) => {console.log('error', error.response);
-      errorHandler(dispatch, error.response, AUTH_ERROR);
+    .catch((error) => {
+      errorHandler(dispatch, error, AUTH_ERROR);
     });
   };
 }
@@ -47,19 +47,3 @@ export function logoutUser(error) {
   };
 }
 
-export function protectedTest() {
-  return function (dispatch) {
-    axios.get(`${API_URL}/protected`, {
-      headers: { Authorization: cookie.load('token') },
-    })
-    .then((response) => {
-      dispatch({
-        type: PROTECTED_TEST,
-        payload: response.data.content,
-      });
-    })
-    .catch((error) => {
-      errorHandler(dispatch, error.response, AUTH_ERROR);
-    });
-  };
-}

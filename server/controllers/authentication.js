@@ -54,7 +54,7 @@ exports.register = function (req, res, next) {
 
       // If user is not unique, return error
     if (existingUser) {
-      return res.status(422).send({ error: 'That email address is already in use.' });
+      return res.status(422).send({ error: 'That email address or username is already in use.' });
     }
 
     // If email is unique and password was provided, create account
