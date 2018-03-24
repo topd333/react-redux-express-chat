@@ -4,9 +4,8 @@ const express = require('express');
 const passportService = require('./config/passport');
 const passport = require('passport');
 
-// Middleware to require login/auth
+// Middleware to require auth
 const requireAuth = passport.authenticate('jwt', { session: false });
-const requireLogin = passport.authenticate('local', { session: false });
 
 module.exports = function (app) {
   // Initializing route groups
@@ -25,7 +24,7 @@ module.exports = function (app) {
   authRoutes.post('/register', AuthenticationController.register);
 
   // Login route
-  authRoutes.post('/login', requireLogin, AuthenticationController.login);
+  authRoutes.post('/login', AuthenticationController.login);
 
   //= ========================
   // User Routes
@@ -36,11 +35,6 @@ module.exports = function (app) {
 
   // View user profile route
   userRoutes.get('/:userId', requireAuth, UserController.viewProfile);
-
-  // Test protected route
-  apiRoutes.get('/protected', requireAuth, (req, res) => {
-    res.status(200).send({ content: 'The protected test route is functional!' });
-  });
 
   // Set url for API group routes
   app.use('/api', apiRoutes);

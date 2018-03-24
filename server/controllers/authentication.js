@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const passport = require('passport');
 const User = require('../models/user');
 const setUserInfo = require('../helpers').setUserInfo;
 const config = require('../config/main');
@@ -15,12 +16,22 @@ function generateToken(user) {
 // Login Route
 //= =======================================
 exports.login = function (req, res, next) {
-  const userInfo = setUserInfo(req.user);
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+      return res.status(404).send(err);
+    }
 
-  res.status(200).json({
-    token: `JWT ${generateToken(userInfo)}`,
-    user: userInfo
-  });
+    if(user){
+      const userInfo = setUserInfo(user);
+
+      res.status(200).json({
+        token: `JWT ${generateToken(userInfo)}`,
+        user: userInfo
+      });
+    } else {
+      res.status(401).send(info);
+    }
+  })(req, res);
 };
 
 
