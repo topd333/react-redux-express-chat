@@ -4,10 +4,19 @@ import cookie from 'react-cookie';
 import { API_URL, CLIENT_ROOT_URL, errorHandler } from './index';
 import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from './types';
 
-//================================
+//= ===============================
 // Authentication actions
-//================================
-export function loginUser({ email, password }) {
+//= ===============================
+export function loginUser({ email, password, remember }) { 
+console.log(email);
+  if (remember) {
+    localStorage.setItem('email', email);
+    localStorage.setItem('pwd', password);
+  } else {
+    localStorage.setItem('email', null);
+    localStorage.setItem('pwd', null);
+  }
+
   return function (dispatch) {
     axios.post(`${API_URL}/auth/login`, { email, password })
     .then((response) => {

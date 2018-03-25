@@ -5,7 +5,7 @@ import { loginUser } from '../../actions/auth';
 
 const form = reduxForm({
   form: 'Login',
-  validate
+  validate,
 });
 
 const renderField = field => (
@@ -15,6 +15,9 @@ const renderField = field => (
   </div>
 );
 
+function loginfrom() {
+
+}
 
 function validate(formProps) {
   const errors = {};
@@ -45,6 +48,15 @@ class Login extends Component {
     }
   }
 
+
+  componentDidMount() {
+    const email = localStorage.getItem('email');
+    const password = localStorage.getItem('pwd');
+    if (email && password) {
+      this.props.loginUser({ email, password, remember: true });
+    }
+  }
+
   render() {
     const { handleSubmit } = this.props;
 
@@ -54,11 +66,15 @@ class Login extends Component {
           {this.renderAlert()}
           <div>
             <label>Email</label>
-            <Field name="email" className="form-control" component={renderField} type="text" />
+            <Field name="email" className="form-control" component={renderField} type="text" value="" />
           </div>
           <div>
             <label>Password</label>
-            <Field name="password" className="form-control" component={renderField} type="password" />
+            <Field name="password" className="form-control" component={renderField} type="password" value="" />
+          </div>
+          <div>
+            <label>Remember Me</label>
+            <Field name="remember" className="form-control" component={renderField} type="checkbox" />
           </div>
           <button type="submit" className="btn btn-primary">Login</button>
         </form>
