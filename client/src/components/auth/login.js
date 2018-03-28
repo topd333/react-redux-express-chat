@@ -10,7 +10,7 @@ const form = reduxForm({
 
 const renderField = field => (
   <div>
-    <input className="form-control" {...field.input} type={field.type} />
+    <input className={field.className} {...field.input} type={field.type} />
     {field.meta.touched && field.meta.error && <div className="help-block error">{field.meta.error}</div>}
   </div>
 );
@@ -74,7 +74,7 @@ class Login extends Component {
           </div>
           <div>
             <label>Remember Me</label>
-            <Field name="remember" className="form-control" component={renderField} type="checkbox" />
+            <Field name="remember" component={renderField} type="checkbox" />
           </div>
           <button type="submit" className="btn btn-primary">Login</button>
         </form>

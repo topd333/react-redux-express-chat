@@ -5,6 +5,7 @@ const express = require('express'),
   logger = require('morgan'),
   router = require('./router'),
   mongoose = require('mongoose'),
+  socketEvents = require('./socketEvents'),
   config = require('./config/main');
   cors = require('cors');
 
@@ -18,8 +19,9 @@ app.use(cors());
 let server = app.listen(config.port);
 console.log(`Your server is running on port ${config.port}.`);
 
-// Set static file location for production
-// app.use(express.static(__dirname + '/public'));
+// Connect Socket.io
+const io = require('socket.io').listen(server);
+socketEvents(io);
 
 // Setting up basic middleware for all Express requests
 app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies

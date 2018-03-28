@@ -38,3 +38,24 @@ export function errorHandler(dispatch, error, type) {
     payload: errorMessage,
   });
 }
+
+// Post Request
+export function postData(action, errorType, isAuthReq, url, dispatch, data) {
+  const requestUrl = API_URL + url;
+  let headers = {};
+
+  if (isAuthReq) {
+    headers = { headers: { Authorization: cookie.load('token') } };
+  }
+
+  axios.post(requestUrl, data, headers)
+  .then((response) => {
+    dispatch({
+      type: action,
+      payload: response.data,
+    });
+  })
+  .catch((error) => {
+    errorHandler(dispatch, error.response, errorType);
+  });
+}

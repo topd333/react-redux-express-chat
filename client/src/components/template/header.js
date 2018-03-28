@@ -13,6 +13,9 @@ class HeaderTemplate extends Component {
           <Link to="dashboard">Dashboard</Link>
         </li>,
         <li key={`${3}header`}>
+          <Link to="chat">Chat</Link>
+        </li>,
+        <li key={`${4}header`}>
           <Link to="logout">Logout</Link>
         </li>,
       ];
