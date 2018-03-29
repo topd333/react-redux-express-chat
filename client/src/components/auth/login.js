@@ -15,10 +15,6 @@ const renderField = field => (
   </div>
 );
 
-function loginfrom() {
-
-}
-
 function validate(formProps) {
   const errors = {};
 
@@ -48,8 +44,7 @@ class Login extends Component {
     }
   }
 
-
-  componentDidMount() {
+  componentWillMount() {
     const email = localStorage.getItem('email');
     const password = localStorage.getItem('pwd');
     if (email && password) {

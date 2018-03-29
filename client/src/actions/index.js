@@ -39,6 +39,27 @@ export function errorHandler(dispatch, error, type) {
   });
 }
 
+// Get Request
+export function getData(action, errorType, isAuthReq, url, dispatch) {
+  const requestUrl = API_URL + url;
+  let headers = {};
+
+  if (isAuthReq) {
+    headers = { headers: { Authorization: cookie.load('token') } };
+  }
+console.log(headers);return;
+  axios.get(requestUrl, headers)
+  .then((response) => {
+    dispatch({
+      type: action,
+      payload: response.data,
+    });
+  })
+  .catch((error) => {
+    errorHandler(dispatch, error.response, errorType);
+  });
+}
+
 // Post Request
 export function postData(action, errorType, isAuthReq, url, dispatch, data) {
   const requestUrl = API_URL + url;

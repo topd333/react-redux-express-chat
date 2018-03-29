@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/chat';
 
+import * as actions from '../../actions/chat';
+import { fetchMessages } from '../../actions/chat';
 import MessageList from './message-list';
-import ReplyMessage from './reply-message';
+import SendMessage from './send-message';
 
 const socket = actions.socket;
 
@@ -14,6 +15,10 @@ class Chat extends Component {
 
     const { params } = this.props;
     socket.emit('join', true);
+  }
+
+  componentWillMount() {
+    this.props.fetchMessages();
   }
 
   componentWillUnmount() {
@@ -38,7 +43,7 @@ class Chat extends Component {
             { this.renderChatHistory() }
           </div>
         </div>
-        <ReplyMessag/>
+        <SendMessage />
       </div>
     );
   }
@@ -46,7 +51,7 @@ class Chat extends Component {
 
 function mapStateToProps(state) {
   return {
-    messages: state.communication.messages,
+    messages: state.chat.messages,
   };
 }
 

@@ -8,13 +8,12 @@ import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from './types';
 // Authentication actions
 //= ===============================
 export function loginUser({ email, password, remember }) { 
-console.log(email);
   if (remember) {
     localStorage.setItem('email', email);
     localStorage.setItem('pwd', password);
   } else {
-    localStorage.setItem('email', null);
-    localStorage.setItem('pwd', null);
+    localStorage.setItem('email', '');
+    localStorage.setItem('pwd', '');
   }
 
   return function (dispatch) {
@@ -55,4 +54,3 @@ export function logoutUser(error) {
     window.location.href = `${CLIENT_ROOT_URL}/login`;
   };
 }
-

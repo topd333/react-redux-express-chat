@@ -13,5 +13,6 @@ export const FETCH_USER = 'fetch_user';
 //= =====================
 // Chat Actions
 //= =====================
-export const CHAT_ERROR = 'chat_error',
-  SEND_REPLY = 'send_reply';
+export const FETCH_MESSAGES = 'fetch_messages',
+  CHAT_ERROR = 'chat_error',
+  SEND = 'send';
