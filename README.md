@@ -64,6 +64,6 @@ And you can access the frontend by visiting [http://localhost:8080](http://local
 
 ![SignUp](/screens/signup.png?raw=true)
 
-### Dashboard
+### Chat
 
-![Dashboard](/screens/dashboard.png?raw=true)
+![Chat](/screens/chat.png?raw=true)
