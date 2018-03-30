@@ -36,7 +36,9 @@ const localLogin = new LocalStrategy(localOptions, (username, password, done) =>
 
 // Setting JWT strategy options
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwt"),
+  // Telling Passport to check authorization headers for JWT
+  jwtFromRequest: ExtractJwt.fromAuthHeader(),
+  // Telling Passport where to find the secret
   secretOrKey: config.secret
 };
 
