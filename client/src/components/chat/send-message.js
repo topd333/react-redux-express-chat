@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { sendReply } from '../../actions/chat';
+import { send } from '../../actions/chat';
 
 const form = reduxForm({
-  form: 'replyMessage',
+  form: 'sendMessage',
 });
 
 const renderField = field => (
   <div>
-    <input className="form-control" autoComplete="off" {...field.input} />
+    <textarea className="form-control" autoComplete="off" {...field.input} />
   </div>
 );
 
-class ReplyMessage extends Component {
+class SendMessage extends Component {
   handleFormSubmit(formProps) {
-    this.props.sendReply(formProps);
+    this.props.send(formProps);
   }
 
   renderAlert() {
@@ -23,12 +23,6 @@ class ReplyMessage extends Component {
       return (
         <div className="alert alert-danger">
           <strong>Oops!</strong> {this.props.errorMessage}
-        </div>
-      );
-    } else if (this.props.message) {
-      return (
-        <div className="alert alert-success">
-          <strong>Success!</strong> {this.props.message}
         </div>
       );
     }
@@ -40,7 +34,7 @@ class ReplyMessage extends Component {
     return (
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         {this.renderAlert()}
-        <Field name="composedMessage" className="form-control" component={renderField} type="text" placeholder="Type here to chat..." />
+        <Field name="message" className="form-control" component={renderField} type="textarea" placeholder="Type here to chat..." />
         <button action="submit" className="btn btn-primary">Send</button>
       </form>
     );
@@ -49,8 +43,8 @@ class ReplyMessage extends Component {
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.communication.error,
+    errorMessage: state.chat.error,
   };
 }
 
-export default connect(mapStateToProps, { sendReply })(form(ReplyMessage));
+export default connect(mapStateToProps, { send })(form(SendMessage));

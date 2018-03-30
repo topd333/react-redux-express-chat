@@ -5,13 +5,24 @@ const currentUser = cookie.load('user');
 
 class MessageItem extends Component {
   render() {
-  return (
-    <div className={currentUser == this.props.author._id ? 'message current-user' : 'message'}>
-    <span className="message-body">{this.props.message}</span>
-    <br />
-    <span className="message-byline">From {this.props.author.username} | {this.props.timestamp}</span>
-    </div>
-  );
+    return (
+      <li className={currentUser._id == this.props.author._id ? 'self' : 'other'}>
+        <span className="username">{ this.props.author.username }</span>
+        <div className="msg">
+          <p>
+            {this.props.message.split('\n').map(function(item, key) {
+              return (
+                <span key={key}>
+                  {item}
+                  <br/>
+                </span>
+              )
+            })}
+          </p>
+          <time>{this.props.timestamp}</time>
+        </div>
+      </li>
+    );
   }
 }
 

@@ -47,7 +47,7 @@ export function getData(action, errorType, isAuthReq, url, dispatch) {
   if (isAuthReq) {
     headers = { headers: { Authorization: cookie.load('token') } };
   }
-console.log(headers);return;
+
   axios.get(requestUrl, headers)
   .then((response) => {
     dispatch({

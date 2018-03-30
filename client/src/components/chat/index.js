@@ -13,12 +13,27 @@ class Chat extends Component {
   constructor(props) {
     super(props);
 
-    const { params } = this.props;
+    this.state = {
+      messages: []
+    };
+
     socket.emit('join', true);
+
+    socket.on('thread', function(data) {
+      addMessage(data);
+    });
+
+    const addMessage = data => {
+      this.setState({messages: [...this.state.messages, data]});
+    };
   }
 
   componentWillMount() {
     this.props.fetchMessages();
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({'messages': nextProps.messages});
   }
 
   componentWillUnmount() {
@@ -26,9 +41,9 @@ class Chat extends Component {
   }
 
   renderChatHistory() {
-    if (this.props.messages) {
+    if(this.state.messages) {
       return (
-        <MessageList displayMessages={this.props.messages} />
+        <MessageList messages={this.state.messages} />
       );
     }
   }
@@ -37,9 +52,7 @@ class Chat extends Component {
     return (
       <div>
         <div className="panel panel-default">
-          <div className="panel-body">
-            <h4 className="left">Chat</h4>
-            <div className="clearfix" />
+          <div className="panel-body chat-body">
             { this.renderChatHistory() }
           </div>
         </div>

@@ -6,14 +6,18 @@ import MessageItem from './message-item';
 class MessageList extends Component {
   render() {
     return (
-      <div className="messages">
-        {this.props.displayMessages.map(data => <MessageItem
-          key={data._id}
-          message={data.body}
-          author={data.author}
-          timestamp={moment(data.createdAt).from(moment())}
-        />)}
-      </div>
+      <ol className="chat">
+        {this.props.messages.map(function(data) {
+          if(data.author) {
+            return <MessageItem
+              key={data._id}
+              message={data.body}
+              author={data.author}
+              timestamp={moment(data.createdAt).format('lll')}
+            />
+          }
+        })}
+      </ol>
     );
   }
 }
