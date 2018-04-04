@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Router, browserHistory } from 'react-router';
-import reduxThunk from 'redux-thunk';
+import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import cookie from 'react-cookie';
-import routes from './routes';
-import reducers from './reducers/index';
 import ReactGA from 'react-ga';
+
+import routes from './routes';
+import reducers from './reducers';
+import rootSaga from './sagas';
 import { AUTH_USER } from './actions/types';
 
 // Import stylesheets
@@ -20,8 +23,14 @@ function logPageView() {
   ReactGA.pageview(window.location.pathname);
 }
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducers);
+const sagaMiddleware = createSagaMiddleware();
+const enhancer = compose(
+  applyMiddleware(thunk),
+  applyMiddleware(sagaMiddleware),
+);
+
+const store = createStore(reducers, enhancer);
+sagaMiddleware.run(rootSaga);
 
 const token = cookie.load('token');
 
