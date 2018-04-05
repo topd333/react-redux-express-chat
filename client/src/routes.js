@@ -16,6 +16,7 @@ import Logout from './components/auth/logout';
 // Import dashboard pages
 import Dashboard from './components/dashboard/dashboard';
 import Chat from './components/chat';
+import Workspace from './components/workspace';
 import ViewProfile from './components/dashboard/profile/view-profile';
 
 // Import higher order components
@@ -30,6 +31,7 @@ export default (
 
     <Route path="profile" component={RequireAuth(ViewProfile)} />
     <Route path="chat" component={RequireAuth(Chat)} />
+    <Route path="workspace" component={RequireAuth(Workspace)} />
 
     <Route path="dashboard">
       <IndexRoute component={RequireAuth(Dashboard)} />

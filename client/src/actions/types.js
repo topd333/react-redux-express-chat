@@ -8,7 +8,8 @@ export const AUTH_USER = 'auth_user',
 //= =====================
 // User Profile Actions
 //= =====================
-export const FETCH_USER = 'fetch_user';
+export const FETCH_USER = 'fetch_user',
+  ERROR_RESPONSE = 'error_response';
 
 //= =====================
 // Chat Actions
@@ -16,3 +17,9 @@ export const FETCH_USER = 'fetch_user';
 export const FETCH_MESSAGES = 'fetch_messages',
   CHAT_ERROR = 'chat_error',
   SEND = 'send';
+
+//= =====================
+// Workspace Actions
+//= =====================
+export const FETCH_WORKSPACES = 'fetch_workspaces',
+  CREATE_WORKSPACE = 'create_workspace';
