@@ -9,14 +9,14 @@ class HeaderTemplate extends Component {
         <li key={`${1}header`}>
           <Link to="/">Home</Link>
         </li>,
+        <li key={`${2}header`}>
+          <Link to="/chat">Multi Chat</Link>
+        </li>,
         <li key={`${3}header`}>
-          <Link to="chat">Chat</Link>
+          <Link to="/workspace">Workspace</Link>
         </li>,
         <li key={`${4}header`}>
-          <Link to="workspace">Workspace</Link>
-        </li>,
-        <li key={`${5}header`}>
-          <Link to="logout">Logout</Link>
+          <Link to="/logout">Logout</Link>
         </li>,
       ];
     } else {
@@ -26,10 +26,10 @@ class HeaderTemplate extends Component {
           <Link to="/">Home</Link>
         </li>,
         <li key={2}>
-          <Link to="login">Login</Link>
+          <Link to="/login">Login</Link>
         </li>,
         <li key={3}>
-          <Link to="register">Register</Link>
+          <Link to="/register">Register</Link>
         </li>,
       ];
     }

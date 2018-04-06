@@ -10,7 +10,7 @@ import ReactGA from 'react-ga';
 
 import routes from './routes';
 import reducers from './reducers';
-import rootSaga from './sagas';
+import sagas from './sagas';
 import { AUTH_USER } from './actions/types';
 
 // Import stylesheets
@@ -30,7 +30,7 @@ const enhancer = compose(
 );
 
 const store = createStore(reducers, enhancer);
-sagaMiddleware.run(rootSaga);
+sagas.forEach((saga) => sagaMiddleware.run(saga));
 
 const token = cookie.load('token');
 

@@ -1,6 +1,7 @@
 const AuthController = require('./controllers/authentication');
 const UserController = require('./controllers/user');
 const ChatController = require('./controllers/chat');
+const WorkspaceController = require('./controllers/workspace');
 
 const express = require('express');
 const passport = require('passport');
@@ -15,7 +16,8 @@ module.exports = function (app) {
   const apiRoutes = express.Router(),
     authRoutes = express.Router(),
     userRoutes = express.Router(),
-    chatRoutes = express.Router();
+    chatRoutes = express.Router(),
+    workspaceRoutes = express.Router();
 
   //= ========================
   // Auth Routes
@@ -52,6 +54,22 @@ module.exports = function (app) {
 
   // Send in conversation
   chatRoutes.post('/send', requireAuth, ChatController.send);
+
+  //= ========================
+  // Chat Routes
+  //= ========================
+
+  // Set workspace routes as a subgroup/middleware to apiRoutes
+  apiRoutes.use('/workspace', workspaceRoutes);
+
+  // View workspaces to and from authenticated user
+  workspaceRoutes.get('/', WorkspaceController.getWorkspaces);
+
+  // Create workspace
+  workspaceRoutes.post('/create', WorkspaceController.createWorkspace);
+
+  // View workspace
+  workspaceRoutes.get('/:workspaceId', WorkspaceController.viewWorkspace);
 
   // Set url for API group routes
   app.use('/api', apiRoutes);

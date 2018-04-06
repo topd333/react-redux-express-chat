@@ -25,15 +25,16 @@ import RequireAuth from './components/auth/require_auth';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
-    <Route path="register" component={Register} />
-    <Route path="login" component={Login} />
-    <Route path="logout" component={Logout} />
+    <Route path="/register" component={Register} />
+    <Route path="/login" component={Login} />
+    <Route path="/logout" component={Logout} />
 
-    <Route path="profile" component={RequireAuth(ViewProfile)} />
-    <Route path="chat" component={RequireAuth(Chat)} />
-    <Route path="workspace" component={RequireAuth(Workspace)} />
+    {/*<Route path="/profile" component={RequireAuth(ViewProfile)} />*/}
+    <Route path="/chat" component={RequireAuth(Chat)} />
+    <Route path="/workspace" component={RequireAuth(Workspace)} />
+    <Route path="/workspace/:workspaceId" component={RequireAuth(Chat)} />
 
-    <Route path="dashboard">
+    <Route path="/dashboard">
       <IndexRoute component={RequireAuth(Dashboard)} />
     </Route>
   </Route>

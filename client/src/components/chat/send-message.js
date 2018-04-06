@@ -15,7 +15,7 @@ const renderField = field => (
 
 class SendMessage extends Component {
   handleFormSubmit(formProps) {
-    this.props.send(formProps);
+    this.props.send({...formProps, workspace: this.props.workspace});
   }
 
   renderAlert() {

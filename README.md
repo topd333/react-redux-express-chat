@@ -13,7 +13,7 @@ Backend:
 Frontend:
 
 * React.js
-* Redux (Router, Thunk)
+* Redux (Router, Thunk, Saga)
 * Scss
 * Webpack
 

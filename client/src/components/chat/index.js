@@ -32,7 +32,7 @@ class Chat extends Component {
     this.props.fetchMessages();
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     this.setState({'messages': nextProps.messages});
   }
 
@@ -43,7 +43,7 @@ class Chat extends Component {
   renderChatHistory() {
     if(this.state.messages) {
       return (
-        <MessageList messages={this.state.messages} />
+        <MessageList messages={this.state.messages} workspace={this.props.params.workspaceId} />
       );
     }
   }
@@ -56,7 +56,7 @@ class Chat extends Component {
             { this.renderChatHistory() }
           </div>
         </div>
-        <SendMessage />
+        <SendMessage workspace={this.props.params.workspaceId} />
       </div>
     );
   }

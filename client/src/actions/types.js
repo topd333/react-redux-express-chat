@@ -22,4 +22,5 @@ export const FETCH_MESSAGES = 'fetch_messages',
 // Workspace Actions
 //= =====================
 export const FETCH_WORKSPACES = 'fetch_workspaces',
+  WORKSPACE_ERROR = 'workspace_error',
   CREATE_WORKSPACE = 'create_workspace';

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose'),
+  bcrypt = require('bcrypt-nodejs'),
   Schema = mongoose.Schema;
 
 //= ===============================
@@ -13,12 +14,12 @@ const WorkspaceSchema = new Schema(
     },
     name: {
       type: String,
+      unique: true,
       required: true
     },
     email: {
       type: String,
       lowercase: true,
-      unique: true,
       required: true
     },
     password: {

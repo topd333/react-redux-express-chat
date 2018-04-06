@@ -182,3 +182,11 @@ p.copyright>span {
   display: inline-block;
   margin-right: 4px;
 }
+
+.workspace-list {
+  list-style: none;
+  font-size: 16px;
+}
+.workspace-list .name {
+  margin-right: 10px;
+}

@@ -8,17 +8,15 @@ class WorkspaceList extends Component {
     return (
       <div>
         <h3>List</h3>
-        <ol>
+        <ul className="workspace-list">
           {this.props.workspaces.map(function(data) {
-            if(data.author) {
-              return <WorkspaceItem
-                key={data._id}
-                name={data.name}
-                link={data.link}
-              />
-            }
+            return <WorkspaceItem
+              key={data._id}
+              name={data.name}
+              id={data._id}
+            />
           })}
-        </ol>
+        </ul>
       </div>
     );
   }

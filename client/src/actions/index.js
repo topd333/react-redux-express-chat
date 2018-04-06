@@ -56,7 +56,7 @@ export function getData(action, errorType, isAuthReq, url, dispatch) {
     });
   })
   .catch((error) => {
-    errorHandler(dispatch, error.response, errorType);
+    errorHandler(dispatch, error, errorType);
   });
 }
 
@@ -77,6 +77,6 @@ export function postData(action, errorType, isAuthReq, url, dispatch, data) {
     });
   })
   .catch((error) => {
-    errorHandler(dispatch, error.response, errorType);
+    errorHandler(dispatch, error, errorType);
   });
 }

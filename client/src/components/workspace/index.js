@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+
 import CreateWorkspace from './create';
 import WorkspaceList from './list';
+import Types from '../../actions/s_types';
 
 class Workspace extends Component {
 
@@ -14,6 +16,14 @@ class Workspace extends Component {
     this.state = {
       workspaces: []
     };
+  }
+
+  componentWillMount() {
+    this.props.fetchWorkspaces();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({'workspaces': nextProps.workspaces});
   }
 
   render() {
@@ -38,7 +48,14 @@ class Workspace extends Component {
 }
 
 function mapStateToProps(state) {
-  return { content: state.auth.content };
+  return {
+    workspaces: state.workspace.workspaces,
+  };
 }
 
-export default connect(mapStateToProps)(Workspace);
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchWorkspaces: () => dispatch({type: Types.FETCH_WORKSPACE_REQUEST})
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Workspace);

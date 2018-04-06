@@ -59,11 +59,10 @@ exports.register = function (req, res, next) {
     return res.status(422).send({ error: 'You must enter a password.' });
   }
 
-
   User.findOne({$or: [{'email': email}, {'username': username}]}, (err, existingUser) => {
     if (err) { return next(err); }
 
-      // If user is not unique, return error
+    // If user is not unique, return error
     if (existingUser) {
       return res.status(422).send({ error: 'That email address or username is already in use.' });
     }

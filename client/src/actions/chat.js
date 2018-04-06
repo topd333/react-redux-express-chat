@@ -15,7 +15,7 @@ export const socket = io.connect('http://localhost:3000');
 // Messaging actions
 //= ===============================
 export function fetchMessages() {
-  const url = '/chat';
+  const url = `/chat`;
   return dispatch => getData(FETCH_MESSAGES, CHAT_ERROR, true, url, dispatch);
 }
 
@@ -33,6 +33,7 @@ export function send(body) {
         _id: currentUser._id,
         username: currentUser.username
       },
+      workspace: body.workspace,
       createdAt: moment()
     }
     socket.emit('message', message);

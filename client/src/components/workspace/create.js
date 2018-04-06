@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { createWorkspace } from '../../actions/workspace';
+import Types from '../../actions/s_types';
 
 const form = reduxForm({
-  form: 'CreateWorkspace',
+  form: 'createWorkspace',
   validate,
 });
 
@@ -47,14 +47,21 @@ function validate(formProps) {
 
 class CreateWorkspace extends Component {
   handleFormSubmit(formProps) {
-    this.props.send(formProps);
+    this.props.createWorkspace(formProps);
   }
 
   renderAlert() {
-    if (this.props.error) {
+    if (this.props.errorMessage) {
       return (
         <div className="alert alert-danger">
-          <strong>Oops!</strong> {this.props.error}
+          <strong>Oops!</strong> {this.props.errorMessage}
+        </div>
+      );
+    }
+    else if (this.props.successMessage) {
+      return (
+        <div className="alert alert-info">
+          <strong>Great!</strong> {this.props.successMessage}
         </div>
       );
     }
@@ -97,8 +104,15 @@ class CreateWorkspace extends Component {
 
 function mapStateToProps(state) {
   return {
-    error: state.workspace.error,
+    errorMessage: state.workspace.error,
+    successMessage: state.workspace.success,
   };
 }
 
-export default connect(mapStateToProps, { createWorkspace })(form(CreateWorkspace));
+function mapDispatchToProps(dispatch) {
+  return {
+    createWorkspace: (data) => dispatch({type: Types.CREATE_WORKSPACE_REQUEST, payload: data})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(form(CreateWorkspace));
