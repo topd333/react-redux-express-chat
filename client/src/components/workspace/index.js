@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
+import GetWorkspace from './get';
 import CreateWorkspace from './create';
 import WorkspaceList from './list';
 import Types from '../../actions/s_types';
@@ -37,6 +38,7 @@ class Workspace extends Component {
         <div className="tab-content">
           <div id="list" className="tab-pane fade in active">
             <WorkspaceList workspaces={this.state.workspaces}/>
+            <GetWorkspace />
           </div>
           <div id="create" className="tab-pane fade">
             <CreateWorkspace />

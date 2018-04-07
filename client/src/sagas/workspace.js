@@ -2,7 +2,7 @@ import { put, all, call, takeLatest } from 'redux-saga/effects';
 import { reset } from 'redux-form';
 
 import Types from '../actions/s_types';
-import { fetchWorkspacesAsync, createWorkspaceAsync } from '../api';
+import { fetchWorkspacesAsync, createWorkspaceAsync, getWorkspaceAsync } from '../api';
 
 function* fetchWorkspaces(action) {
   try {
@@ -33,9 +33,26 @@ function* createWorkspace(action) {
   }
 }
 
+function* getWorkspace(action) {
+  try {
+    const res = yield getWorkspaceAsync(action.payload);
+    yield put({ type: Types.GET_WORKSPACE_SUCCESS, payload: res.data });
+    yield put(reset('getWorkspace'));
+  } catch (err) {
+    if(err.response) {
+      yield put({ type: Types.GET_WORKSPACE_FAILED, payload: err.response.data.error });
+    }
+    else {
+      yield put({ type: Types.GET_WORKSPACE_FAILED, payload: "Network failed" });
+    }
+  }
+}
+
+
 export function* workspace() {
   yield all([
     takeLatest(Types.FETCH_WORKSPACE_REQUEST, fetchWorkspaces),
-    takeLatest(Types.CREATE_WORKSPACE_REQUEST, createWorkspace)
+    takeLatest(Types.CREATE_WORKSPACE_REQUEST, createWorkspace),
+    takeLatest(Types.GET_WORKSPACE_REQUEST, getWorkspace)
   ]);
 }

@@ -7,3 +7,6 @@ export const fetchWorkspacesAsync = () =>
 
 export const createWorkspaceAsync = (data) =>
   axios.post(API_URL + '/workspace/create', data);
+
+export const getWorkspaceAsync = (data) =>
+  axios.post(API_URL + '/workspace/get', data);

@@ -12,6 +12,10 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, workspace: action.payload.workspace, success: 'Success', error: '' };
     case Types.CREATE_WORKSPACE_FAILED:
       return { ...state, error: action.payload };
+    case Types.GET_WORKSPACE_SUCCESS:
+      return { ...state, success: 'Sent the email!', error: '' };
+    case Types.GET_WORKSPACE_FAILED:
+      return { ...state, success: '', error: action.payload };
   }
 
   return state;

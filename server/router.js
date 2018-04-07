@@ -68,6 +68,9 @@ module.exports = function (app) {
   // Create workspace
   workspaceRoutes.post('/create', WorkspaceController.createWorkspace);
 
+  // Get workspace
+  workspaceRoutes.post('/get', WorkspaceController.getWorkspace);
+
   // View workspace
   workspaceRoutes.get('/:workspaceId', WorkspaceController.viewWorkspace);
 
